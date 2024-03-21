@@ -33,10 +33,13 @@ namespace FlagLearner.Views
             // 
             this.flagListView.GridLines = true;
             this.flagListView.Location = new System.Drawing.Point(12, 149);
+            this.flagListView.MultiSelect = false;
             this.flagListView.Name = "flagListView";
-            this.flagListView.Size = new System.Drawing.Size(917, 332);
+            this.flagListView.Size = new System.Drawing.Size(793, 332);
             this.flagListView.TabIndex = 0;
             this.flagListView.UseCompatibleStateImageBehavior = false;
+            this.flagListView.SelectedIndexChanged += new System.EventHandler(this.flagListView_SelectedIndexChanged);
+            this.flagListView.DoubleClick += new System.EventHandler(this.flagListView_DoubleClick);
             // 
             // searchBox
             // 
@@ -65,14 +68,14 @@ namespace FlagLearner.Views
             this.colorFilterList.Location = new System.Drawing.Point(12, 95);
             this.colorFilterList.MultiColumn = true;
             this.colorFilterList.Name = "colorFilterList";
-            this.colorFilterList.Size = new System.Drawing.Size(395, 48);
+            this.colorFilterList.Size = new System.Drawing.Size(264, 48);
             this.colorFilterList.TabIndex = 3;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(941, 505);
+            this.ClientSize = new System.Drawing.Size(812, 505);
             this.Controls.Add(this.lineFilterList);
             this.Controls.Add(this.colorFilterList);
             this.Controls.Add(this.searchBox);

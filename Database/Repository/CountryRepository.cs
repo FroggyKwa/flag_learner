@@ -85,5 +85,10 @@ namespace FlagLearner.Database.Repository
         {
             return _db.Countries.Update(item).Entity;
         }
+
+        public Country? GetItemByName(string name)
+        {
+            return _db.Countries.FirstOrDefault(item => item.CountryName == name);
+        }
     }
 }

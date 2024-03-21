@@ -29,40 +29,38 @@
         private void InitializeComponent()
         {
             this.flagPictureBox = new System.Windows.Forms.PictureBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.CountryInfoPropertyGridView = new System.Windows.Forms.PropertyGrid();
             ((System.ComponentModel.ISupportInitialize)(this.flagPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // flagPictureBox
             // 
-            this.flagPictureBox.Location = new System.Drawing.Point(159, 12);
+            this.flagPictureBox.Location = new System.Drawing.Point(563, 12);
             this.flagPictureBox.Name = "flagPictureBox";
             this.flagPictureBox.Size = new System.Drawing.Size(463, 234);
             this.flagPictureBox.TabIndex = 0;
             this.flagPictureBox.TabStop = false;
             // 
-            // dataGridView1
+            // CountryInfoPropertyGridView
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(159, 252);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 29;
-            this.dataGridView1.Size = new System.Drawing.Size(463, 188);
-            this.dataGridView1.TabIndex = 1;
+            this.CountryInfoPropertyGridView.DisabledItemForeColor = System.Drawing.SystemColors.ControlText;
+            this.CountryInfoPropertyGridView.Location = new System.Drawing.Point(12, 12);
+            this.CountryInfoPropertyGridView.Name = "CountryInfoPropertyGridView";
+            this.CountryInfoPropertyGridView.Size = new System.Drawing.Size(545, 426);
+            this.CountryInfoPropertyGridView.TabIndex = 1;
+            this.CountryInfoPropertyGridView.ToolbarVisible = false;
             // 
             // CountryInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(1038, 450);
+            this.Controls.Add(this.CountryInfoPropertyGridView);
             this.Controls.Add(this.flagPictureBox);
             this.Name = "CountryInfoForm";
             this.Text = "CountryInfoForm";
+            this.Load += new System.EventHandler(this.CountryInfoForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.flagPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -70,6 +68,6 @@
         #endregion
 
         private PictureBox flagPictureBox;
-        private DataGridView dataGridView1;
+        private PropertyGrid CountryInfoPropertyGridView;
     }
 }
