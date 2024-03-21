@@ -1,0 +1,48 @@
+﻿using FlagLearner.Database.Entities;
+using FlagLearner.Database.Repository.Interfaces;
+
+namespace FlagLearner.Database.Repository
+{
+    public class LineRepository : ILineRepository
+    {
+        private readonly CountriesContext _db;
+
+        public LineRepository(CountriesContext db)
+        {
+            _db = db;
+        }
+
+        public Line Create(Line item)
+        {
+            return _db.Add(item).Entity;
+        }
+
+        public Line? Delete(int id)
+        {
+            Line? item = GetItem(id);
+            if (item == null)
+                return null;
+            return _db.Remove(item).Entity;
+        }
+
+        public IEnumerable<Line> GetAll()
+        {
+            return _db.Lines.Select(item => item);
+        }
+
+        public Line? GetItem(int id)
+        {
+            return _db.Lines.FirstOrDefault(item => item.Id == id);
+        }
+
+        public void Save()
+        {
+            _db.SaveChangesAsync();
+        }
+
+        public Line? Update(Line item)
+        {
+            return _db.Lines.Update(item).Entity;
+        }
+    }
+}
