@@ -7,5 +7,10 @@
         public long CountryId { get; set; }
 
         public virtual Country Country { get; set; } = null!;
+
+        public override string ToString()
+        {
+            return ColorName;
+        }
     }
 }

@@ -13,8 +13,13 @@
         public long? CountryInfoId { get; set; }
         public string ImageUrl { get; set; } = null!;
 
-        public virtual Countryinfo? CountryInfo { get; set; }
+        public virtual CountryInfo CountryInfo { get; set; } = null!;
         public virtual ICollection<Color> Colors { get; set; }
         public virtual ICollection<Line> Lines { get; set; }
+
+        public override string ToString()
+        {
+            return CountryName;
+        }
     }
 }

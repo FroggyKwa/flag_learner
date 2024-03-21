@@ -1,8 +1,8 @@
 ﻿namespace FlagLearner.Database.Entities
 {
-    public partial class Countryinfo
+    public partial class CountryInfo
     {
-        public Countryinfo()
+        public CountryInfo()
         {
             Countries = new HashSet<Country>();
         }
