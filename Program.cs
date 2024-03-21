@@ -2,7 +2,7 @@ using FlagLearner.Database;
 using FlagLearner.Database.Entities;
 using FlagLearner.Database.Repository;
 
-namespace FlagLearner
+namespace FlagLearner.Views
 {
     internal static class Program
     {

@@ -17,9 +17,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.28" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-    <Folder Include="Views\" />
-  </ItemGroup>
-
 </Project>
