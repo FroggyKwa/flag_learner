@@ -26,9 +26,9 @@ namespace FlagLearner.Database.Repository
             return _db.Remove(item).Entity;
         }
 
-        public IEnumerable<Color> GetAll()
+        public List<Color> GetAll()
         {
-            return _db.Colors.Select(item => item);
+            return _db.Colors.Select(item => item).ToList();
         }
 
         public Color? GetItem(int id)

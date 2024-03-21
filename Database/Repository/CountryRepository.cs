@@ -6,11 +6,47 @@ namespace FlagLearner.Database.Repository
 {
     public class CountryRepository : ICountryRepository
     {
+        public class QueryBuilder
+        {
+            private readonly CountriesContext _db;
+            private IQueryable<Country> _query = null!;
+
+            public QueryBuilder(CountriesContext db)
+            {
+                _db = db;
+            }
+
+            public List<Country> Build()
+            {
+                return _query.ToList();
+            }
+
+            public QueryBuilder GetAll()
+            {
+                _query = _db.Countries.Select(item => item);
+                return this;
+            }
+
+            public QueryBuilder WithColors()
+            {
+                _query = _query.Include(c => c.Colors);
+                return this;
+            }
+
+            public QueryBuilder WithLines()
+            {
+                _query = _query.Include(c => c.Lines);
+                return this;
+            }
+        }
+
         private readonly CountriesContext _db;
+        public QueryBuilder queryBuilder;
 
         public CountryRepository(CountriesContext db)
         {
             _db = db;
+            queryBuilder = new QueryBuilder(db);
         }
 
         public Country Create(Country item)
@@ -26,9 +62,9 @@ namespace FlagLearner.Database.Repository
             return _db.Remove(item).Entity;
         }
 
-        public IEnumerable<Country> GetAll()
+        public List<Country> GetAll()
         {
-            return _db.Countries.Select(item => item).ToList();
+            return queryBuilder.GetAll().Build();
         }
 
         public Country? GetItem(int id)

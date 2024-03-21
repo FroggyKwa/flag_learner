@@ -25,9 +25,9 @@ namespace FlagLearner.Database.Repository
             return _db.Remove(item).Entity;
         }
 
-        public IEnumerable<Line> GetAll()
+        public List<Line> GetAll()
         {
-            return _db.Lines.Select(item => item);
+            return _db.Lines.Select(item => item).ToList();
         }
 
         public Line? GetItem(int id)
