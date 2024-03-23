@@ -1,5 +1,4 @@
 ﻿using FlagLearner.Database.Repository;
-using FlagLearner.Helpers;
 using static FlagLearner.Database.Converters.CountryConverter;
 using static FlagLearner.Helpers.FilterCompute;
 
@@ -36,14 +35,15 @@ namespace FlagLearner.ViewModels
         {
             var withLines = _countryRepository.WithLines(filters["lines"]!);
             var withColors = _countryRepository.WithColors(filters["colors"]!);
-
-            if (!withColors.Any() && !withLines.Any())
+            
+            var withQuery = _countryRepository.GetCountriesByNamePattern(filters["search_query"]![0]);
+            if (!withColors.Any() && !withLines.Any() && !withQuery.Any())
             {
                 countries.Clear();
                 countries = _countryRepository.GetAll();
             }
             else
-                countries = FilterCompute.IntersectNonEmpty(new List<List<DomainCountryModel>>() { withLines, withColors });
+                countries = IntersectLists(new List<List<DomainCountryModel>>() { withLines, withColors, withQuery });
             return countries;
         }
     }

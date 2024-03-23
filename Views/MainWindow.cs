@@ -23,9 +23,8 @@ namespace FlagLearner.Views
             {
                 ["lines"] = new List<string>(),
                 ["colors"] = new List<string>(),
-                ["search_query"] = new List<string>(),
+                ["search_query"] = new List<string>() { "" },
             };
-
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
@@ -37,6 +36,7 @@ namespace FlagLearner.Views
             lineFilterList.DataSource = Enum.GetNames(typeof(Lines));
 
             listItems = new List<ListViewItem>();
+
 
             LoadCountryList();
         }
@@ -161,6 +161,14 @@ namespace FlagLearner.Views
             TextBox? textBox = sender as TextBox;
             if (textBox != null)
                 filters["search_query"] = new List<string> { textBox.Text };
+        }
+
+        private void searchBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                LoadCountryList();
+            }
         }
     }
 }

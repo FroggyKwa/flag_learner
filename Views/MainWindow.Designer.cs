@@ -49,6 +49,7 @@ namespace FlagLearner.Views
             this.searchBox.Size = new System.Drawing.Size(264, 27);
             this.searchBox.TabIndex = 2;
             this.searchBox.TextChanged += new System.EventHandler(this.searchBox_TextChanged);
+            this.searchBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.searchBox_KeyPress);
             // 
             // lineFilterList
             // 

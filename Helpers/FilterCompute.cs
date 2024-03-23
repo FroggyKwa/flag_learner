@@ -20,7 +20,7 @@ namespace FlagLearner.Helpers
     }
     public static class FilterCompute
     {
-        public static List<DomainCountryModel> IntersectNonEmpty(List<List<DomainCountryModel>> lists)
+        public static List<DomainCountryModel> IntersectLists(List<List<DomainCountryModel>> lists)
         {
             // Filter out empty lists and perform intersection
             return lists

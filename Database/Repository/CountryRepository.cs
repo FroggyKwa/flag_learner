@@ -59,9 +59,14 @@ namespace FlagLearner.Database.Repository
             return _db.Countries.Update(item.ToModel()).Entity.ToDomain();
         }
 
-        public DomainCountryModel? GetItemByName(string name)
+        public List<DomainCountryModel> GetCountriesByNamePattern(string name)
         {
-            return _db.Countries.FirstOrDefault(item => item.CountryName == name)?.ToDomain();
+            return _db
+                .Countries
+                .Where(item => item
+                .CountryName.Contains(name))
+                .Select(item => item.ToDomain())
+                .ToList();
         }
 
         public List<DomainCountryModel> WithLines(List<string> lines)
