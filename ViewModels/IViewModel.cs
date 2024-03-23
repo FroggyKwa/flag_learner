@@ -5,8 +5,8 @@ namespace FlagLearner.ViewModels
 {
     public abstract class IViewModelBase
     {
-        protected static CountriesContext _db;
-        protected static CountryRepository _countryRepository;
+        protected static CountriesContext _db = null!;
+        protected static CountryRepository _countryRepository = null!;
 
         public IViewModelBase()
         {

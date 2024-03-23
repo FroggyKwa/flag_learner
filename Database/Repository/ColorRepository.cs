@@ -1,5 +1,5 @@
 ﻿using FlagLearner.Database.Repository.Interfaces;
-
+using Microsoft.EntityFrameworkCore;
 using Color = FlagLearner.Database.Entities.Color;
 
 namespace FlagLearner.Database.Repository
@@ -28,7 +28,9 @@ namespace FlagLearner.Database.Repository
 
         public List<Color> GetAll()
         {
-            return _db.Colors.Select(item => item).ToList();
+            return _db.Colors
+                .Include(color => color.Country)
+                .Select(item => item).ToList();
         }
 
         public Color? GetItem(int id)

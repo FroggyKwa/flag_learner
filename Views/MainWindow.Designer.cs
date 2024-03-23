@@ -1,4 +1,4 @@
-﻿using FlagLearner.Views.Common;
+﻿using FlagLearner.Helpers;
 
 namespace FlagLearner.Views
 {
@@ -48,16 +48,20 @@ namespace FlagLearner.Views
             this.searchBox.PlaceholderText = "Search";
             this.searchBox.Size = new System.Drawing.Size(264, 27);
             this.searchBox.TabIndex = 2;
+            this.searchBox.TextChanged += new System.EventHandler(this.searchBox_TextChanged);
             // 
             // lineFilterList
             // 
+            this.lineFilterList.CheckOnClick = true;
             this.lineFilterList.FormattingEnabled = true;
-            this.lineFilterList.Location = new System.Drawing.Point(12, 41);
+            this.lineFilterList.Location = new System.Drawing.Point(12, 54);
             this.lineFilterList.MultiColumn = true;
             this.lineFilterList.Name = "lineFilterList";
-            this.lineFilterList.Size = new System.Drawing.Size(264, 48);
+            this.lineFilterList.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.lineFilterList.Size = new System.Drawing.Size(788, 26);
             this.lineFilterList.TabIndex = 4;
             this.lineFilterList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lineFilterList_ItemCheck);
+            this.lineFilterList.Click += new System.EventHandler(this.lineFilterList_Click);
             // 
             // colorFilterList
             // 
@@ -68,8 +72,11 @@ namespace FlagLearner.Views
             this.colorFilterList.Location = new System.Drawing.Point(12, 95);
             this.colorFilterList.MultiColumn = true;
             this.colorFilterList.Name = "colorFilterList";
-            this.colorFilterList.Size = new System.Drawing.Size(264, 48);
+            this.colorFilterList.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.colorFilterList.Size = new System.Drawing.Size(788, 48);
             this.colorFilterList.TabIndex = 3;
+            this.colorFilterList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.colorFilterList_ItemCheck);
+            this.colorFilterList.Click += new System.EventHandler(this.colorFilterList_Click);
             // 
             // MainWindow
             // 

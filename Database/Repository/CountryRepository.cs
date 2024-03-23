@@ -1,79 +1,52 @@
-﻿using FlagLearner.Database.Entities;
+﻿using FlagLearner.Database.Converters;
+using FlagLearner.Database.Entities;
 using FlagLearner.Database.Repository.Interfaces;
+using FlagLearner.Helpers;
 using Microsoft.EntityFrameworkCore;
+
+using static FlagLearner.Database.Converters.CountryConverter;
 
 namespace FlagLearner.Database.Repository
 {
     public class CountryRepository : ICountryRepository
     {
-        public class QueryBuilder
-        {
-            private readonly CountriesContext _db;
-            private IQueryable<Country> _query = null!;
-
-            public QueryBuilder(CountriesContext db)
-            {
-                _db = db;
-            }
-
-            public List<Country> Build()
-            {
-                return _query.ToList();
-            }
-
-            public QueryBuilder GetAll()
-            {
-                _query = _db.Countries.Select(item => item);
-                return this;
-            }
-
-            public QueryBuilder WithColors()
-            {
-                _query = _query.Include(c => c.Colors);
-                return this;
-            }
-
-            public QueryBuilder WithLines()
-            {
-                _query = _query.Include(c => c.Lines);
-                return this;
-            }
-        }
 
         private readonly CountriesContext _db;
-        public QueryBuilder queryBuilder;
 
         public CountryRepository(CountriesContext db)
         {
             _db = db;
-            queryBuilder = new QueryBuilder(db);
         }
 
-        public Country Create(Country item)
+        public DomainCountryModel Create(DomainCountryModel item)
         {
-            return _db.Add(item).Entity;
+            return _db.Add(item.ToModel()).Entity.ToDomain();
         }
 
-        public Country? Delete(int id)
+        public DomainCountryModel? Delete(int id)
         {
-            Country? item = GetItem(id);
+            DomainCountryModel? item = GetItem(id);
             if (item == null)
                 return null;
-            return _db.Remove(item).Entity;
+            return _db.Remove(item.ToModel()).Entity.ToDomain();
         }
 
-        public List<Country> GetAll()
+        public List<DomainCountryModel> GetAll()
         {
-            return queryBuilder.GetAll().Build();
+            return _db.Countries
+                .Include(c => c.Lines)
+                .Include(c => c.Colors)
+                .Select(item => item.ToDomain())
+                .ToList();
         }
 
-        public Country? GetItem(int id)
+        public DomainCountryModel? GetItem(int id)
         {
             return _db.Countries
                 .Include(c => c.CountryInfo)
                 .Include(c => c.Lines)
                 .Include(c => c.Colors)
-                .FirstOrDefault(item => item.Id == id);
+                .FirstOrDefault(item => item.Id == id)?.ToDomain();
         }
 
         public void Save()
@@ -81,14 +54,30 @@ namespace FlagLearner.Database.Repository
             _db.SaveChangesAsync();
         }
 
-        public Country? Update(Country item)
+        public DomainCountryModel? Update(DomainCountryModel item)
         {
-            return _db.Countries.Update(item).Entity;
+            return _db.Countries.Update(item.ToModel()).Entity.ToDomain();
         }
 
-        public Country? GetItemByName(string name)
+        public DomainCountryModel? GetItemByName(string name)
         {
-            return _db.Countries.FirstOrDefault(item => item.CountryName == name);
+            return _db.Countries.FirstOrDefault(item => item.CountryName == name)?.ToDomain();
+        }
+
+        public List<DomainCountryModel> WithLines(List<string> lines)
+        {
+            return GetAll()
+                .Where(item => item.Lines
+                .Intersect(lines).Any())
+                .ToList();
+        }
+
+        public List<DomainCountryModel> WithColors(List<string> colors)
+        {
+            return GetAll()
+            .Where(item => item.Colors
+                .Intersect(colors).Any())
+                .ToList();
         }
     }
 }

@@ -1,21 +1,28 @@
-﻿using FlagLearner.Database;
-using FlagLearner.Database.Entities;
-using FlagLearner.Database.Repository;
+﻿using FlagLearner.Database.Repository;
+using FlagLearner.Helpers;
+using static FlagLearner.Database.Converters.CountryConverter;
+using static FlagLearner.Helpers.FilterCompute;
 
 namespace FlagLearner.ViewModels
 {
     public class MainViewModel : IViewModelBase
     {
-        public List<Country> countries { get; } = null!;
+        private LineRepository _lineRepository = null!;
+        public List<DomainCountryModel> countries { get; set; } = null!;
         public int selectedCountryId { get; set; }
-        public Country? selectedCountry {
-            get => _countryRepository.GetItem(selectedCountryId); }
 
-        
+        public int selectedListIndex { get; set; }
+        public DomainCountryModel? selectedCountry {
+            get => _countryRepository
+                .GetItem(
+                (int)countries[selectedListIndex].Id);
+        }
+
 
         public MainViewModel()
         {
-            countries = _countryRepository.queryBuilder.GetAll().Build();
+            countries = new();
+            _lineRepository = new LineRepository(_db);
         }
 
         public CountryInfoViewModel? CreateViewModel()
@@ -25,5 +32,19 @@ namespace FlagLearner.ViewModels
             return null;
         }
 
+        public List<DomainCountryModel> LoadCountries(Dictionary<string, List<string>?> filters)
+        {
+            var withLines = _countryRepository.WithLines(filters["lines"]!);
+            var withColors = _countryRepository.WithColors(filters["colors"]!);
+
+            if (!withColors.Any() && !withLines.Any())
+            {
+                countries.Clear();
+                countries = _countryRepository.GetAll();
+            }
+            else
+                countries = FilterCompute.IntersectNonEmpty(new List<List<DomainCountryModel>>() { withLines, withColors });
+            return countries;
+        }
     }
 }

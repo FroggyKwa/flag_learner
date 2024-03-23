@@ -1,5 +1,6 @@
 ﻿using FlagLearner.Database.Entities;
 using FlagLearner.Database.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace FlagLearner.Database.Repository
 {
@@ -27,7 +28,9 @@ namespace FlagLearner.Database.Repository
 
         public List<Line> GetAll()
         {
-            return _db.Lines.Select(item => item).ToList();
+            return _db.Lines
+                .Include(line => line.Country)
+                .Select(item => item).ToList();
         }
 
         public Line? GetItem(int id)
