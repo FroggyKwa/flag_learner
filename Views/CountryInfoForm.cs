@@ -16,7 +16,7 @@ namespace FlagLearner.Views
         {
             Text = DataContext.selectedCountry.ToString();
             flagPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            flagPictureBox.ImageLocation = $"../../../{DataContext.selectedCountry.ImageUrl}";
+            flagPictureBox.ImageLocation = DataContext.selectedCountry.ImageUrl;
             TypeDescriptor.AddAttributes(
                 DataContext.countryInfo,
                 new Attribute[] { new ReadOnlyAttribute(true) });

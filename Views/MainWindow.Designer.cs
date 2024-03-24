@@ -88,6 +88,7 @@ namespace FlagLearner.Views
             this.Controls.Add(this.colorFilterList);
             this.Controls.Add(this.searchBox);
             this.Controls.Add(this.flagListView);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainWindow";
             this.Text = "MainWindow";
