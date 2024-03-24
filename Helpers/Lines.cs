@@ -1,6 +1,6 @@
 ﻿namespace FlagLearner.Helpers
 {
-    public enum Lines
+    public enum LinesEnum
     {
         horizontal,
         vertical,
