@@ -58,6 +58,7 @@
             this.Controls.Add(this.CountryInfoPropertyGridView);
             this.Controls.Add(this.flagPictureBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "CountryInfoForm";
             this.Text = "CountryInfoForm";
             this.Load += new System.EventHandler(this.CountryInfoForm_Load);
