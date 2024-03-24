@@ -1,8 +1,5 @@
-using FlagLearner.Database.Entities;
 using FlagLearner.ViewModels;
 using FlagLearner.Helpers;
-using System.CodeDom;
-using System.Windows.Forms;
 using static FlagLearner.Database.Converters.CountryConverter;
 
 namespace FlagLearner.Views
@@ -30,10 +27,10 @@ namespace FlagLearner.Views
         private void MainWindow_Load(object sender, EventArgs e)
         {
             colorFilterList.Items.Clear();
-            colorFilterList.DataSource = Enum.GetNames(typeof(ColorsEnum));
+            colorFilterList.Items.AddRange(Enum.GetNames(typeof(ColorsEnum)).ToArray());
 
             lineFilterList.Items.Clear();
-            lineFilterList.DataSource = Enum.GetNames(typeof(Lines));
+            lineFilterList.Items.AddRange(Enum.GetNames(typeof(LinesEnum)).ToArray());
 
             listItems = new List<ListViewItem>();
 
