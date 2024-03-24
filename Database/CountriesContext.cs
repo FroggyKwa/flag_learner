@@ -127,7 +127,9 @@ public partial class CountriesContext : DbContext
                 .HasColumnType("VARCHAR(255)")
                 .HasColumnName("phone_code");
 
-            entity.Property(e => e.Population).HasColumnName("population");
+            entity.Property(e => e.Population)
+                .HasColumnType("VARCHAR(3)")
+                .HasColumnName("population");
 
             entity.Property(e => e.Sovereign)
                 .HasColumnType("VARCHAR(3)")
