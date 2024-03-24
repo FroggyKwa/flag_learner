@@ -13,7 +13,7 @@
         public string? Continent { get; set; }
         public string? Sovereign { get; set; }
         public string? Member { get; set; }
-        public long? Population { get; set; }
+        public string? Population { get; set; }
         public long? Area { get; set; }
         public string? Currency { get; set; }
         public string? PhoneCode { get; set; }

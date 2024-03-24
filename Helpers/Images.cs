@@ -6,7 +6,7 @@ namespace FlagLearner.Helpers
     {
         static public Image LoadImageByObj(Country country)
         {
-            return Image.FromFile($"../../../{country.ImageUrl}");
+            return Image.FromFile($"{country.ImageUrl}");
         }
     }
 }
